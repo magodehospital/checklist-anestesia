@@ -5,124 +5,261 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Checklist Pre-inducción Anestesia</title>
   <style>
-    body {
+    body{
       font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-      background: #f5f5f5;
-      margin: 0;
-      padding: 16px;
+      background:#f5f5f5;
+      margin:0;
+      padding:16px;
+      line-height:1.35;
     }
-    .card {
-      max-width: 760px;
-      margin: 0 auto;
-      background: #ffffff;
-      padding: 20px;
-      border-radius: 16px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    .card{
+      max-width:760px;
+      margin:0 auto;
+      background:#fff;
+      padding:20px;
+      border-radius:16px;
+      box-shadow:0 4px 12px rgba(0,0,0,0.08);
     }
-    h1 {
-      margin-top: 0;
-      font-size: 24px;
+    h1{margin:0 0 8px 0;font-size:24px;}
+    h2{
+      margin:24px 0 10px 0;
+      font-size:18px;
+      border-bottom:1px solid #ddd;
+      padding-bottom:4px;
     }
-    h2 {
-      margin-top: 24px;
-      font-size: 18px;
-      border-bottom: 1px solid #ddd;
-      padding-bottom: 4px;
+    label{display:block;margin:8px 0;cursor:pointer;}
+    input[type="checkbox"]{margin-right:10px;transform:scale(1.1);}
+    .note{font-size:14px;color:#555;margin:10px 0 0 0;}
+    .hardstop-badge{
+      display:inline-block;
+      font-size:12px;
+      padding:2px 8px;
+      border-radius:999px;
+      background:#ffe7ba;
+      color:#7a4a00;
+      margin-left:8px;
+      vertical-align:middle;
     }
-    label {
-      display: block;
-      margin: 8px 0;
-      cursor: pointer;
+
+    .button{
+      margin-top:28px;
+      width:100%;
+      padding:16px;
+      font-size:18px;
+      font-weight:700;
+      background:#2e7d32;
+      color:#fff;
+      border:none;
+      border-radius:12px;
+      cursor:pointer;
     }
-    input[type="checkbox"] {
-      margin-right: 8px;
-      transform: scale(1.1);
+    .button:active{opacity:0.92;}
+    .button:disabled{
+      background:#9e9e9e;
+      cursor:not-allowed;
     }
-    .button {
-      margin-top: 32px;
-      width: 100%;
-      padding: 16px;
-      font-size: 18px;
-      font-weight: bold;
-      background: #2e7d32;
-      color: white;
-      border: none;
-      border-radius: 12px;
-      cursor: pointer;
+    .button.secondary{
+      background:#1f2937;
+      margin-top:14px;
     }
-    .button:active {
-      opacity: 0.9;
+
+    /* Pantallas */
+    .screen{display:none;}
+    .screen.active{display:block;}
+
+    /* Panel de estado */
+    .status{
+      margin-top:12px;
+      padding:12px;
+      border-radius:12px;
+      background:#f3f4f6;
+      border:1px solid #e5e7eb;
+      font-size:14px;
+      color:#111827;
     }
-    .note {
-      font-size: 14px;
-      color: #555;
-      margin-top: 8px;
-    }
+    .status strong{display:block;margin-bottom:6px;}
+    ul.missing{margin:8px 0 0 18px;padding:0;}
   </style>
 </head>
 
 <body>
-  <div class="card">
+  <!-- SCREEN 1: CHECKLIST -->
+  <div class="card screen active" id="screenChecklist">
     <h1>Checklist pre-inducción anestésica</h1>
+    <div class="note">Uso: pre-inducción. Vía aérea guiada por algoritmo <strong>VORTEX</strong>.</div>
 
     <!-- SECCIÓN 1 -->
     <h2>1. Reconfirmación pre-inducción</h2>
-    <label><input type="checkbox">Alergias reconfirmadas</label>
-    <label><input type="checkbox">Ayuno reconfirmado</label>
-    <label><input type="checkbox">Uso reciente de agonistas GLP-1 descartado / considerado</label>
-    <label><input type="checkbox">Nuevos riesgos o riesgos no discutidos previamente identificados</label>
+    <label><input type="checkbox" id="s1_allergies">Alergias reconfirmadas</label>
+    <label><input type="checkbox" id="s1_npo">Ayuno reconfirmado</label>
+    <label><input type="checkbox" id="s1_glp1">Uso reciente de agonistas GLP-1 descartado / considerado</label>
+    <label><input type="checkbox" id="s1_newrisks">Nuevos riesgos o riesgos no discutidos previamente identificados</label>
 
     <!-- SECCIÓN 2 -->
-    <h2>2. Vía aérea (algoritmo VORTEX)</h2>
-    <label><input type="checkbox">Evaluación de vía aérea reconfirmada</label>
-    <label><input type="checkbox">Plan A definido (VORTEX)</label>
-    <label><input type="checkbox">Plan B disponible (VORTEX)</label>
-    <label><input type="checkbox">Plan de rescate considerado (VORTEX)</label>
-    <label><input type="checkbox">Oxígeno confirmado y conectado</label>
-    <label><input type="checkbox">Succión funcionando</label>
-    <label><input type="checkbox">Dispositivos básicos listos</label>
-    <label><input type="checkbox">Dispositivo supraglótico disponible</label>
-    <label><input type="checkbox">Material de intubación preparado</label>
-    <label><input type="checkbox">Confirmación de ventilación planificada (capnografía)</label>
+    <h2>2. Vía aérea (VORTEX)</h2>
+    <label><input type="checkbox" id="s2_airway">Evaluación de vía aérea reconfirmada</label>
 
-    <div class="note">Si vía aérea sospechada:</div>
-    <label><input type="checkbox">Ayuda / backup identificados y accesibles</label>
-    <label><input type="checkbox">Equipo avanzado disponible</label>
-    <label><input type="checkbox">Estrategia de preoxigenación definida</label>
-    <label><input type="checkbox">Estrategia ante imposibilidad de ventilar explícita</label>
+    <label>
+      <input type="checkbox" id="hs_planA">
+      Plan A definido (VORTEX)
+      <span class="hardstop-badge">Hard-stop</span>
+    </label>
+
+    <label><input type="checkbox" id="s2_planB">Plan B disponible (VORTEX)</label>
+    <label><input type="checkbox" id="s2_rescue">Plan de rescate considerado (VORTEX)</label>
+
+    <label>
+      <input type="checkbox" id="hs_o2">
+      Oxígeno confirmado y conectado
+      <span class="hardstop-badge">Hard-stop</span>
+    </label>
+
+    <label>
+      <input type="checkbox" id="hs_suction">
+      Succión funcionando
+      <span class="hardstop-badge">Hard-stop</span>
+    </label>
+
+    <label><input type="checkbox" id="s2_basics">Dispositivos básicos listos</label>
+    <label><input type="checkbox" id="s2_sga">Dispositivo supraglótico disponible</label>
+    <label><input type="checkbox" id="s2_intub">Material de intubación preparado</label>
+    <label><input type="checkbox" id="s2_etco2plan">Confirmación de ventilación planificada (capnografía)</label>
+
+    <div class="note"><strong>Si vía aérea sospechada:</strong></div>
+    <label><input type="checkbox" id="s2_help">Ayuda / backup identificados y accesibles</label>
+    <label><input type="checkbox" id="s2_adv">Equipo avanzado disponible</label>
+    <label><input type="checkbox" id="s2_preox">Estrategia de preoxigenación definida</label>
+    <label><input type="checkbox" id="s2_cantvent">Estrategia ante imposibilidad de ventilar explícita</label>
 
     <!-- SECCIÓN 3 -->
     <h2>3. Monitoreo y equipo</h2>
-    <label><input type="checkbox">Monitores alternos o adicionales identificados y disponibles</label>
-    <label><input type="checkbox">Capnografía disponible y funcional (si aplica)</label>
-    <label><input type="checkbox">Acceso venoso funcional</label>
-    <label><input type="checkbox">Alternativa de acceso considerada</label>
-    <label><input type="checkbox">Máquina de anestesia revisada y lista</label>
-    <label><input type="checkbox">Ventilador y circuito correctos</label>
-    <label><input type="checkbox">Alarmas activas y audibles</label>
-    <label><input type="checkbox">Fuente de oxígeno y gases confirmada</label>
+    <label><input type="checkbox" id="s3_altmon">Monitores alternos o adicionales identificados y disponibles</label>
+    <label><input type="checkbox" id="s3_capno">Capnografía disponible y funcional (si aplica)</label>
+    <label><input type="checkbox" id="s3_iv">Acceso venoso funcional</label>
+    <label><input type="checkbox" id="s3_iv_alt">Alternativa de acceso considerada</label>
+    <label><input type="checkbox" id="s3_machine">Máquina de anestesia revisada y lista</label>
+    <label><input type="checkbox" id="s3_vent">Ventilador y circuito correctos</label>
+    <label><input type="checkbox" id="s3_alarms">Alarmas activas y audibles</label>
+    <label><input type="checkbox" id="s3_gas">Fuente de oxígeno y gases confirmada</label>
 
     <!-- SECCIÓN 4 -->
     <h2>4. Medicación y hemodinamia</h2>
-    <label><input type="checkbox">Plan de inducción / sedación definido</label>
-    <label><input type="checkbox">Medicación preparada y correctamente rotulada</label>
-    <label><input type="checkbox">Vasopresor disponible y listo</label>
-    <label><input type="checkbox">Cronotrópico disponible y listo</label>
-    <label><input type="checkbox">Estrategia ante hipotensión anticipada</label>
-    <label><input type="checkbox">Relajante neuromuscular y plan de reversión (si aplica)</label>
 
-    <div class="note">Si riesgo de sangrado elevado:</div>
-    <label><input type="checkbox">Estrategia de manejo de sangrado definida</label>
-    <label><input type="checkbox">Acceso adicional considerado</label>
-    <label><input type="checkbox">Disponibilidad de hemoderivados confirmada</label>
+    <label>
+      <input type="checkbox" id="hs_induction">
+      Plan de inducción / sedación definido
+      <span class="hardstop-badge">Hard-stop</span>
+    </label>
+
+    <label><input type="checkbox" id="s4_labels">Medicación preparada y correctamente rotulada</label>
+
+    <label>
+      <input type="checkbox" id="hs_pressor">
+      Vasopresor disponible y listo
+      <span class="hardstop-badge">Hard-stop</span>
+    </label>
+
+    <label>
+      <input type="checkbox" id="hs_chrono">
+      Cronotrópico disponible y listo
+      <span class="hardstop-badge">Hard-stop</span>
+    </label>
+
+    <label><input type="checkbox" id="s4_hypotension">Estrategia ante hipotensión anticipada</label>
+    <label><input type="checkbox" id="s4_nmba">Relajante neuromuscular y plan de reversión (si aplica)</label>
+
+    <div class="note"><strong>Si riesgo de sangrado elevado:</strong></div>
+    <label><input type="checkbox" id="s4_bleedplan">Estrategia de manejo de sangrado definida</label>
+    <label><input type="checkbox" id="s4_extraiv">Acceso adicional considerado</label>
+    <label><input type="checkbox" id="s4_blood">Disponibilidad de hemoderivados confirmada</label>
 
     <!-- SECCIÓN 5 -->
     <h2>5. Cierre pre-inducción</h2>
-    <label><input type="checkbox">Checklist pre-inducción completado</label>
-    <label><input type="checkbox">No hay pendientes críticos antes de iniciar</label>
-    <label><input type="checkbox">El plan anestésico está claro y compartido</label>
+    <label><input type="checkbox" id="s5_done">Checklist pre-inducción completado</label>
+    <label><input type="checkbox" id="s5_nocrit">No hay pendientes críticos antes de iniciar</label>
+    <label><input type="checkbox" id="s5_shared">El plan anestésico está claro y compartido</label>
 
-    <button class="button">▶ LISTO PARA INDUCIR</button>
+    <div class="status" id="statusBox">
+      <strong>Estado</strong>
+      Para habilitar <em>LISTO PARA INDUCIR</em>, completa los hard-stops.
+      <ul class="missing" id="missingList"></ul>
+    </div>
+
+    <button class="button" id="readyBtn" disabled>▶ LISTO PARA INDUCIR</button>
   </div>
+
+  <!-- SCREEN 2: MOMENTO DE CABINA ESTÉRIL -->
+  <div class="card screen" id="screenCabina">
+    <h1>Momento de cabina estéril</h1>
+    <p class="note">Pausa breve. Confirmación del equipo y condiciones estériles antes de continuar.</p>
+
+    <button class="button secondary" id="backBtn">← Volver al checklist</button>
+  </div>
+
+<script>
+  // Hard-stops requeridos
+  const hardStopsConfig = [
+    { id: "hs_planA",   label: "Plan A definido (VORTEX)" },
+    { id: "hs_o2",      label: "Oxígeno confirmado y conectado" },
+    { id: "hs_suction", label: "Succión funcionando" },
+    { id: "hs_induction", label: "Plan de inducción / sedación definido" },
+    { id: "hs_pressor", label: "Vasopresor disponible y listo" },
+    { id: "hs_chrono",  label: "Cronotrópico disponible y listo" }
+  ];
+
+  const hardStopBoxes = hardStopsConfig.map(x => document.getElementById(x.id));
+  const readyBtn = document.getElementById("readyBtn");
+  const statusBox = document.getElementById("statusBox");
+  const missingList = document.getElementById("missingList");
+
+  const screenChecklist = document.getElementById("screenChecklist");
+  const screenCabina = document.getElementById("screenCabina");
+  const backBtn = document.getElementById("backBtn");
+
+  function updateHardStops() {
+    const missing = [];
+    for (const item of hardStopsConfig) {
+      const cb = document.getElementById(item.id);
+      if (!cb || !cb.checked) missing.push(item.label);
+    }
+
+    // UI
+    missingList.innerHTML = "";
+    if (missing.length === 0) {
+      readyBtn.disabled = false;
+      statusBox.firstChild.nextSibling; // noop
+      statusBox.childNodes[2].textContent = "Hard-stops completos. Puedes continuar.";
+    } else {
+      readyBtn.disabled = true;
+      statusBox.childNodes[2].textContent = "Para habilitar LISTO PARA INDUCIR, completa los hard-stops.";
+      for (const m of missing) {
+        const li = document.createElement("li");
+        li.textContent = m;
+        missingList.appendChild(li);
+      }
+    }
+  }
+
+  // Cambios en hard-stops actualizan estado
+  hardStopBoxes.forEach(cb => cb.addEventListener("change", updateHardStops));
+  updateHardStops();
+
+  // Botón listo → pantalla cabina estéril
+  readyBtn.addEventListener("click", () => {
+    // Seguridad extra: no navegar si sigue bloqueado
+    if (readyBtn.disabled) return;
+    screenChecklist.classList.remove("active");
+    screenCabina.classList.add("active");
+    window.scrollTo(0,0);
+  });
+
+  // Volver al checklist
+  backBtn.addEventListener("click", () => {
+    screenCabina.classList.remove("active");
+    screenChecklist.classList.add("active");
+    window.scrollTo(0,0);
+  });
+</script>
+
 </body>
 </html>
